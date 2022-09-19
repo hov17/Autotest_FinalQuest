@@ -1,6 +1,12 @@
 from selenium.webdriver.common.by import By
 
 
+# Базовые локаторы
+class BaseLocators():
+    LOGIN_LINK = (By.CSS_SELECTOR, '#login_link')
+    LOGIN_LINK_INVALID = (By.CSS_SELECTOR, '#login_link_inc')
+
+
 # Локаторы для главной страницы
 class MainPageLocators():
     LOGIN_LINK = (By.CSS_SELECTOR, '#login_link')
