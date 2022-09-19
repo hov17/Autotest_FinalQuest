@@ -40,3 +40,13 @@ class ProductPage(BasePage):
         price_of_book_in_message = self.browser.find_element(*ProductPageLocators.PRICE_OF_BOOK_IN_MESSAGE)
         price_of_book_in_message = price_of_book_in_message.text
         assert price_of_book == price_of_book_in_message, 'Цена книги не совпадает!'
+
+    # Сообщение о добавлении товара в корзину не появляется раньше времени
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.MESSAGE_OF_SUCCESS_ADDED_BOOK), \
+            'Сообщение о добавлении товара в корзину появилось заранее!'
+
+    # Сообщение о добавлении товара в корзину исчезает спустя время
+    def success_message_should_be_disappeared(self):
+        assert self.is_disappeared(*ProductPageLocators.MESSAGE_OF_SUCCESS_ADDED_BOOK),\
+            'Сообщение о добавлении товара в корзину не исчезло!'
