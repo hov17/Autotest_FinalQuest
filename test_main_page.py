@@ -2,6 +2,7 @@ from .pages.main_page import MainPage
 from .pages.login_page import LoginPage
 
 
+# Проверка перехода на страницу авторизации
 def test_guest_can_go_to_login_page(browser):
     link = "http://selenium1py.pythonanywhere.com/"
     page = MainPage(browser, link, timeout=10)
@@ -11,6 +12,7 @@ def test_guest_can_go_to_login_page(browser):
     login_page.should_be_login_page()
 
 
+# # Проверка на наличии кнопки перехода на страницу авторизации
 def test_guest_should_be_login_link(browser):
     link = "http://selenium1py.pythonanywhere.com/"
     page = MainPage(browser, link, timeout=10)

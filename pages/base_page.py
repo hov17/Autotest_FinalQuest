@@ -23,6 +23,7 @@ class BasePage():
             return False
         return True
 
+    # Метод для расчета математического выражения (нужен в некоторых тестах)
     def solve_quiz_and_get_code(self):
         alert = self.browser.switch_to.alert
         x = alert.text.split(" ")[2]

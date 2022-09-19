@@ -1,15 +1,18 @@
 from selenium.webdriver.common.by import By
 
 
+# Локаторы для главной страницы
 class MainPageLocators():
     LOGIN_LINK = (By.CSS_SELECTOR, '#login_link')
 
 
+# Локаторы для страницы авторизации
 class LoginPageLocators():
     REGISTRATION_FROM = (By.ID, 'register_form')
     LOGIN_FORM = (By.ID, 'login_form')
 
 
+# Локаторы для страницы товаров
 class ProductPageLocators():
     BUTTON_ADD_TO_CART = (By.CSS_SELECTOR, 'button.btn-add-to-basket')
     MESSAGE_OF_SUCCESS_ADDED_BOOK = (By.CSS_SELECTOR, '#messages :nth-child(1).alert')

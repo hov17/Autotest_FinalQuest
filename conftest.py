@@ -3,11 +3,13 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
 
+# Выбор различного языка страницы для теста
 def pytest_addoption(parser):
     parser.addoption('--language', action='store', default='en',
                      help='Choose language:...')
 
 
+# Фикстура открытия и закрытия браузера
 @pytest.fixture(scope='function')
 def browser(request):
     user_language = request.config.getoption('language')
