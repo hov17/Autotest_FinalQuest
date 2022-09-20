@@ -19,6 +19,11 @@ class BasePage():
     def open(self):
         self.browser.get(self.url)
 
+    # Переход в корзину
+    def go_to_basket_page(self):
+        basket_button = self.browser.find_element(*BaseLocators.BASKET_BUTTON)
+        basket_button.click()
+
     # Переход на страницу авторизации
     def go_to_login_page(self):
         login_link = self.browser.find_element(*BaseLocators.LOGIN_LINK)
