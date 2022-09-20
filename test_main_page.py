@@ -1,5 +1,6 @@
 from .pages.main_page import MainPage
 from .pages.login_page import LoginPage
+from .pages.basket_page import BasketPage
 
 
 # Проверка перехода на страницу авторизации
@@ -18,3 +19,16 @@ def test_guest_should_be_login_link(browser):
     page = MainPage(browser, link, timeout=10)
     page.open()
     page.should_be_login_link()
+
+
+# Переход в пустую корзину с главной страницы
+def test_guest_cant_see_product_in_basket_opened_from_main_page(browser):
+    link = 'http://selenium1py.pythonanywhere.com/'
+    page = MainPage(browser, link, timeout=10)
+    page.open()
+    page.go_to_basket_page()
+    basket_page = BasketPage(browser, browser.current_url, timeout=10)
+    basket_page.basket_should_be_empty()
+    basket_page.should_be_empty_basket_message()
+
+

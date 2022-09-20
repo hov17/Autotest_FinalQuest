@@ -1,6 +1,7 @@
 import pytest
 from .pages.product_page import ProductPage
 from .pages.login_page import LoginPage
+from .pages.basket_page import BasketPage
 
 
 #  В параметрах указываем различные промо. 7-ое промо заведомо падающее
@@ -60,3 +61,15 @@ def test_message_disappeared_after_adding_product_to_basket(browser):
     page.open()
     page.product_add_to_basket()
     page.success_message_should_be_disappeared()
+
+
+# Переход в пустую корзину со страницы продуктов
+def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
+    link = 'http://selenium1py.pythonanywhere.com/catalogue/'
+    page = ProductPage(browser, link, timeout=10)
+    page.open()
+    page.go_to_basket_page()
+    basket_page = BasketPage(browser, link, timeout=10)
+    basket_page.basket_should_be_empty()
+    basket_page.should_be_empty_basket_message()
+
