@@ -6,4 +6,3 @@ from .login_page import LoginPage
 class MainPage(BasePage):
     # заглушка
     pass
-

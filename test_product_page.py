@@ -72,4 +72,3 @@ def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
     basket_page = BasketPage(browser, link, timeout=10)
     basket_page.basket_should_be_empty()
     basket_page.should_be_empty_basket_message()
-

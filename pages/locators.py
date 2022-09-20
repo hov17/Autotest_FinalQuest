@@ -34,4 +34,3 @@ class ProductPageLocators():
     NAME_OF_BOOK_IN_MESSAGE = (By.CSS_SELECTOR, '#messages :nth-child(1) > .alertinner strong')
     PRICE_OF_BOOK = (By.CSS_SELECTOR, '#content_inner p')
     PRICE_OF_BOOK_IN_MESSAGE = (By.CSS_SELECTOR, '#content_inner .product_main .price_color')
-
