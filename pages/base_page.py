@@ -30,6 +30,11 @@ class BasePage():
         login_link.click()
         # return LoginPage(browser=self.browser, url=self.browser.current_url)
 
+    # Проверка, что пользователь авторизирован
+    def should_be_authorized_user(self):
+        assert self.is_element_present(*BaseLocators.USER_ICON), \
+            'Отсутствует иконка пользователя! Возможно, пользователь не авторизирован.'
+
     # Проверка на наличии кнопки перехода на страницу авторизации
     def should_be_login_link(self):
         assert self.is_element_present(*BaseLocators.LOGIN_LINK), 'Login link is not presented'

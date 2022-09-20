@@ -1,7 +1,39 @@
 import pytest
+import time
 from .pages.product_page import ProductPage
 from .pages.login_page import LoginPage
 from .pages.basket_page import BasketPage
+from .pages.base_page import BasePage
+
+
+# Класс тестов для зарегистрированных пользователей
+class TestUserAddToBasketFromProductPage():
+    # Регистрация нового пользователя
+    @pytest.fixture(scope='function', autouse=True)
+    def setup(self, browser):
+        email = str(time.time()) + '@fakemail.org'
+        password = 'Demo12345'
+        link = 'http://selenium1py.pythonanywhere.com/accounts/login/'
+        page = LoginPage(browser, link, timeout=10)
+        page.open()
+        page.register_new_user(email, password)
+        main_page = BasePage(browser, browser.current_url, timeout=10)
+        main_page.should_be_authorized_user()
+
+    # Пользователь добавляет товар в корзину
+    def test_user_can_add_product_to_basket(self, browser):
+        link = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207'
+        page = ProductPage(browser, link, timeout=10)
+        page.open()
+        page.product_add_to_basket()
+        page.product_add_to_basket_success()
+
+    # Нет сообщения о добавлении товара в корзину
+    def test_user_cant_see_success_message(self, browser):
+        link = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207'
+        page = ProductPage(browser, link, timeout=10)
+        page.open()
+        page.should_not_be_success_message()
 
 
 #  В параметрах указываем различные промо. 7-ое промо заведомо падающее
@@ -10,7 +42,7 @@ from .pages.basket_page import BasketPage
 # Тест на добавление товара в корзину и проверку сообщений
 def test_guest_can_add_product_to_basket(browser, num):
     link = f'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer{num}'
-    page = ProductPage(browser, link, timeout=5)
+    page = ProductPage(browser, link, timeout=10)
     page.open()
     page.product_add_to_basket()
     page.solve_quiz_and_get_code()
@@ -39,7 +71,7 @@ def test_guest_can_go_to_login_page_from_product_page(browser):
 @pytest.mark.xfail(reason='После добавления товара, сообщение отображается')
 def test_guest_cant_see_success_message_after_adding_product_to_basket(browser):
     link = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207'
-    page = ProductPage(browser, link)
+    page = ProductPage(browser, link, timeout=10)
     page.open()
     page.product_add_to_basket()
     page.should_not_be_success_message()
@@ -48,7 +80,7 @@ def test_guest_cant_see_success_message_after_adding_product_to_basket(browser):
 # Нет сообщения о добавлении товара в корзину при открытии страницы
 def test_guest_cant_see_success_message(browser):
     link = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207'
-    page = ProductPage(browser, link)
+    page = ProductPage(browser, link, timeout=10)
     page.open()
     page.should_not_be_success_message()
 
@@ -57,7 +89,7 @@ def test_guest_cant_see_success_message(browser):
 @pytest.mark.xfail(reason='Сообщение не исчезает')
 def test_message_disappeared_after_adding_product_to_basket(browser):
     link = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207'
-    page = ProductPage(browser, link)
+    page = ProductPage(browser, link, timeout=10)
     page.open()
     page.product_add_to_basket()
     page.success_message_should_be_disappeared()

@@ -6,6 +6,7 @@ class BaseLocators():
     LOGIN_LINK = (By.CSS_SELECTOR, '#login_link')
     LOGIN_LINK_INVALID = (By.CSS_SELECTOR, '#login_link_inc')
     BASKET_BUTTON = (By.CSS_SELECTOR, '.btn-group :nth-child(1).btn-default')
+    USER_ICON = (By.CSS_SELECTOR, '.icon-user')
 
 
 # Локаторы страницы с корзиной
@@ -23,6 +24,10 @@ class MainPageLocators():
 class LoginPageLocators():
     REGISTRATION_FROM = (By.ID, 'register_form')
     LOGIN_FORM = (By.ID, 'login_form')
+    EMAIL_REGISTER_FIELD = (By.ID, 'id_registration-email')
+    PASSWORD1_REGISTER_FIELD = (By.ID, 'id_registration-password1')
+    PASSWORD2_REGISTER_FIELD = (By.ID, 'id_registration-password2')
+    REGISTER_BUTTON = (By.NAME, 'registration_submit')
 
 
 # Локаторы для страницы товаров
