@@ -8,6 +8,6 @@ class BasketPage(BasePage):
         assert self.is_not_element_present(*BasketPageLocators.BASKET_PRODUCT_FORM), 'В корзине есть товар!'
 
     # Сообщение о том, что корзина пуста
-    def should_be_empty_basket_message(self):
+    def should_be_an_empty_basket_message(self):
         assert self.is_element_present(*BasketPageLocators.EMPTY_BASKET_MESSAGE), \
             'Сообщение о том, что корзина пуста, отсутствует!'

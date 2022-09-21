@@ -21,6 +21,7 @@ class TestUserAddToBasketFromProductPage():
         main_page.should_be_authorized_user()
 
     # Пользователь добавляет товар в корзину
+    @pytest.mark.need_review
     def test_user_can_add_product_to_basket(self, browser):
         link = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207'
         page = ProductPage(browser, link, timeout=10)
@@ -40,6 +41,7 @@ class TestUserAddToBasketFromProductPage():
 @pytest.mark.parametrize('num', [*range(7), pytest.param(7, marks=pytest.mark.xfail(reason='Bugged')),
                                  *range(8, 10)])
 # Тест на добавление товара в корзину и проверку сообщений
+@pytest.mark.need_review
 def test_guest_can_add_product_to_basket(browser, num):
     link = f'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer{num}'
     page = ProductPage(browser, link, timeout=10)
@@ -58,6 +60,7 @@ def test_guest_should_see_login_link_on_product_page(browser):
 
 
 # Переход на страницу авторизации
+@pytest.mark.need_review
 def test_guest_can_go_to_login_page_from_product_page(browser):
     link = 'http://selenium1py.pythonanywhere.com/catalogue/the-city-and-the-stars_95/'
     page = ProductPage(browser, link, timeout=10)
@@ -96,6 +99,7 @@ def test_message_disappeared_after_adding_product_to_basket(browser):
 
 
 # Переход в пустую корзину со страницы продуктов
+@pytest.mark.need_review
 def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
     link = 'http://selenium1py.pythonanywhere.com/catalogue/'
     page = ProductPage(browser, link, timeout=10)
@@ -103,4 +107,4 @@ def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
     page.go_to_basket_page()
     basket_page = BasketPage(browser, link, timeout=10)
     basket_page.basket_should_be_empty()
-    basket_page.should_be_empty_basket_message()
+    basket_page.should_be_an_empty_basket_message()
